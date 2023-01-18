@@ -1,0 +1,20 @@
+| URL                      | GET                                                     | POST                             | PATCH                         | DELETE                                            |
+| :------------------------| :-----------------------------------------------------: | :------------------------------: | :---------------------------: | :-----------------------------------------------: |
+| /categories              | récupérer toute les catégories                          |                                  |                               |                                                   |
+| ------                   | ------                                                  | ------                           | ------                        | ------                                            |
+| /drinks                  |                                                         | crée une boisson                 |                               |                                                   |
+| /drinks/:id              | récupère une boisson par son id                         |                                  | modifie une boisson           | supprime une boisson et les commentaires associés |
+| /drinks/:id/isavailable  |                                                         |                                  | rend disponible une boisson   |                                                   |
+| /drinks/:id/unavailable  |                                                         |                                  | rend indisponible une boisson |                                                   |
+| /drinks/:id/starscounter |                                                         |                                  | incrémente le compteur        |                                                   |
+| ------                   | ------                                                  | ------                           | ------                        | ------                                            |
+| /reviews                 |                                                         | Crée un commentaire              |                               |                                                   |
+| /reviews/:id             |                                                         |                                  |                               | supprime un commentaire                           |
+| ------                   | ------                                                  | ------                           | ------                        | ------                                            |
+| /users/login             |                                                         | Connexion d'un utilisateur       |                               |                                                   |
+| /users/logout            | Déconnexion d'un utilisateur                            |                                  |                               |                                                   |
+| ------                   | ------                                                  | ------                           | ------                        | ------                                            |
+| /categories/drinks       | récupère les catégories avec leurs boissons associées   |                                  |                               |                                                   |
+| /drinks/:id/reviews      | récupère une boisson avec les commentaires associées    |                                  |                               |                                                   |
+| ------                   | ------                                                  | ------                           | ------                        | ------                                            |
+| /search                  |                                                         | Cherche une boisson              |                               |                                                   |
