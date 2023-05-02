@@ -1,24 +1,24 @@
-import {datamapper} from "../datamapper.js";
+import { usersDatamapper } from "../datamappers/index.js";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 const usersController = {
     async login(req, res) {
+        const form = req.body;
         try {
-            const user = await datamapper.getUser(req.body.email);
-            if (user && await bcrypt.compare(req.body.password, user.pwd)) {
-                req.session.user = {
-                    id : user.id,
-                    name : `${user.firstname} ${user.lastname}`,
-                    email : user.email,
-                    role_id : user.role_id
-                };
-                return res.json(`${user.email} CONNECTED with role ${user.role_id}`);
-            } else {
-                return res.status(401).json('Authenfication failed');
-            }
+            const user = await usersDatamapper.getUser(form.email);
+            if(!user) throw new Error('Error email or password');
+            
+            const isValidPassword = await bcrypt.compare(form.password, user.pwd);
+            if(!isValidPassword) throw new Error('Error email or password');
+
+            delete user.pwd;
+            req.session.user = user;
+            const token = jwt.sign(user, process.env.SESSION_SECRET, {expiresIn: '7 days'});
+            
+            return res.json({user, token});
         } catch (error) {
-            console.error(error);
-            return res.status(500).json(error.toString());
+            return res.status(500).json(error.message);
         }
     },
 

@@ -1,14 +1,13 @@
-import {datamapper} from "../datamapper.js";
+import { searchDatamapper } from "../datamappers/index.js";
 
 const searchController = {
     async search(req, res) {
+        const form = req.body;
         try {
-            const searchStr = req.body.search;
-            const drinks = await datamapper.search(searchStr);
+            const drinks = await searchDatamapper.search(form.search);
             return res.json(drinks);
         } catch (error) {
-            console.error(error);
-            return res.status(500).json(error.toString());
+            return res.status(500).json(error.message);
         }
     }
 }

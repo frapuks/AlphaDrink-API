@@ -1,23 +1,21 @@
-import {datamapper} from "../datamapper.js";
+import { categoriesDatamapper } from "../datamappers/index.js";
 
 const categoriesController = {
     async getAllCategories(req, res) {
         try {
-            const categories = await datamapper.getAllCategories();
+            const categories = await categoriesDatamapper.getAllCategories();
             return res.json(categories);
         } catch (error) {
-            console.error(error);
-            return res.status(500).json(error.toString());
+            return res.status(500).json(error.message);
         }
     },
 
     async getAllCategoriesWithDrinks(req, res) {
         try {
-            const categories = await datamapper.getAllCategoriesWithDrinks();
+            const categories = await categoriesDatamapper.getAllCategoriesWithDrinks();
             return res.json(categories);
         } catch (error) {
-            console.error(error);
-            return res.status(500).json(error.toString());
+            return res.status(500).json(error.message);
         }
     }
 }

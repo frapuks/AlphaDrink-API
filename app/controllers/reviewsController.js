@@ -1,28 +1,30 @@
-import {datamapper} from "../datamapper.js";
+import { reviewsDatamapper } from "../datamappers/index.js";
 
 const reviewsController = {
     async addReview(req, res) {
+        const form = req.body;
+        const drinkId = +form.drink_id;
         try {
-            const drinkId = parseInt(req.body.drink_id)
-            const createdReviews = await datamapper.addReview(req.body);
-            const updatedRate = await datamapper.updateAverageRate(drinkId);
+            const createdReviews = await reviewsDatamapper.addReview(form);
+            const updatedRate = await reviewsDatamapper.updateAverageRate(drinkId);
             return res.json(`Reviews created : ${createdReviews} / updated average rate : ${updatedRate ? true : false}`);
         } catch (error) {
-            console.error(error);
-            return res.status(500).json(error.toString());
+            return res.status(500).json(error.message);
         }
     },
 
     async deleteReview(req, res) {
+        const reviewId = +req.params.id;
         try {
-            const reviewId = parseInt(req.params.id)
-            const result = await datamapper.deleteReview(reviewId);
-            const drinkId = result.rows[0].drink_id;
-            const updatedRate = await datamapper.updateAverageRate(drinkId);
-            return res.json(`Reviews deleted : ${result.rowCount} / updated average rate : ${updatedRate ? true : false}`);
+            // delete review
+            const reviewDeleted = await reviewsDatamapper.deleteReview(reviewId);
+            // update average rate
+            const drinkId = reviewDeleted.drink_id;
+            const updatedRate = await reviewsDatamapper.updateAverageRate(drinkId);
+            // return
+            return res.json(`Review deleted / updated average rate : ${updatedRate ? true : false}`);
         } catch (error) {
-            console.error(error);
-            return res.status(500).json(error.toString());
+            return res.status(500).json(error.message);
         }
     }
 }
