@@ -1,6 +1,6 @@
 import express from "express";
 const searchRouter = express.Router();
-import { searchController } from "../controllers/searchController.js";
+import { searchController } from "../controllers/index.js";
 
 searchRouter.post('/search', searchController.search)
 
@@ -23,7 +23,7 @@ export {searchRouter};
 /**
  * POST /search
  * @summary recherche une boisson
- * @tags search
+ * @tags Search
  * @param {formSearch} request.body.required - recherche
  * @return {array<drink>} 200 - success response - application/json
 */

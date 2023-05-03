@@ -1,11 +1,12 @@
 import express from "express";
 const categoriesRouter = express.Router();
-import { categoriesController } from "../controllers/categoriesController.js";
+import { categoriesController } from "../controllers/index.js";
 
 categoriesRouter.get('/categories', categoriesController.getAllCategories);
 categoriesRouter.get('/categories/drinks', categoriesController.getAllCategoriesWithDrinks);
 
 export {categoriesRouter};
+
 
 // * ---- SWAGGER DOC ---- * \\
 

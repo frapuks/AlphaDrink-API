@@ -1,6 +1,6 @@
 import express from "express";
 const drinksRouter = express.Router();
-import { drinksController } from "../controllers/drinksController.js";
+import { drinksController } from "../controllers/index.js";
 import { security } from "../services/security.js";
 
 drinksRouter.post('/drinks', security.validateToken, security.adminCheck, drinksController.addDrink);
@@ -28,7 +28,6 @@ export {drinksRouter};
  * @property {string} infos.required - infos
  * @property {integer} starscounter.required - nombre de likes
  * @property {integer} averagerate.required - note moyenne sur 5
- * @property {integer} stock.required - stock
  * @property {boolean} isalcool.required - présence d'alcool
  * @property {boolean} isavailable.required - disponibilité
  * @property {integer} category_id.required - id de la catégorie
@@ -43,7 +42,6 @@ export {drinksRouter};
  * @property {string} infos.required - infos
  * @property {integer} starscounter.required - nombre de likes
  * @property {integer} averagerate.required - note moyenne sur 5
- * @property {integer} stock.required - stock
  * @property {boolean} isalcool.required - présence d'alcool
  * @property {boolean} isavailable.required - disponibilité
  * @property {integer} category_id.required - id de la catégorie
@@ -75,7 +73,7 @@ export {drinksRouter};
  * POST /drinks
  * @summary ajoute une boisson
  * @security TokenAuth
- * @tags drink
+ * @tags drinks
  * @param {formCreateDrink} request.body.required - infos
  * @return {drink} 200 - success response - application/json
 */
@@ -83,7 +81,7 @@ export {drinksRouter};
 /**
  * GET /drinks/{id}
  * @summary Récupère toutes les infos d'une boisson
- * @tags drink
+ * @tags drinks
  * @param {integer} id.path - id
  * @return {drink} 200 - success response - application/json
 */
@@ -91,7 +89,7 @@ export {drinksRouter};
 /**
  * GET /drinks/{id}/reviews
  * @summary Récupère toutes les infos d'une boisson avec ses commentaires
- * @tags drink
+ * @tags drinks
  * @param {integer} id.path - id
  * @return {drinkWithReviews} 200 - success response - application/json
 */
@@ -100,7 +98,7 @@ export {drinksRouter};
  * PATCH /drinks/{id}
  * @summary modifie les infos d'une boisson
  * @security TokenAuth
- * @tags drink
+ * @tags drinks
  * @param {integer} id.path - id
  * @param {formUpdateDrink} request.body.required - formulaire
  * @return {drink} 200 - success response - application/json
@@ -110,7 +108,7 @@ export {drinksRouter};
  * PATCH /drinks/{id}/isavailable
  * @summary rend disponible une boisson
  * @security TokenAuth
- * @tags drink
+ * @tags drinks
  * @param {integer} id.path - id
  * @return {drink} 200 - success response - application/json
 */
@@ -119,7 +117,7 @@ export {drinksRouter};
  * PATCH /drinks/{id}/unavailable
  * @summary rend indisponible une boisson
  * @security TokenAuth
- * @tags drink
+ * @tags drinks
  * @param {integer} id.path - id
  * @return {drink} 200 - success response - application/json
 */
@@ -127,7 +125,7 @@ export {drinksRouter};
 /**
  * PATCH /drinks/{id}/addstar
  * @summary ajoute un like à une boisson
- * @tags drink
+ * @tags drinks
  * @param {integer} id.path - id
  * @return {drink} 200 - success response - application/json
 */
@@ -136,7 +134,7 @@ export {drinksRouter};
  * DELETE /drinks/{id}
  * @summary supprime une boisson
  * @security TokenAuth
- * @tags drink
+ * @tags drinks
  * @param {integer} id.path - id
- * @return {drink} 200 - success response - application/json
+ * @return {string} 200 - success response - application/json
 */

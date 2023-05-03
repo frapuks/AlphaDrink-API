@@ -1,6 +1,6 @@
 import express from "express";
 const usersRouter = express.Router();
-import { usersController } from "../controllers/usersController.js";
+import { usersController } from "../controllers/index.js";
 
 usersRouter.post('/users/login', usersController.login);
 usersRouter.post('/users/logout', usersController.logout);
@@ -26,7 +26,7 @@ export {usersRouter};
  * @property {string} firstname.required - prénom
  * @property {string} lastname.required - nom
  * @property {string} email.required - email
- * @property {integer} role_id.required - role
+ * @property {boolean} isadmin.required - role
 */
 
 /**
@@ -41,7 +41,7 @@ export {usersRouter};
 /**
  * POST /users/login
  * @summary connexion
- * @tags auth
+ * @tags Auth
  * @param {formLogin} request.body.required - formulaire de connexion
  * @return {userConnected} 200 - success response - application/json
 */
@@ -49,6 +49,6 @@ export {usersRouter};
 /**
  * POST /users/logout
  * @summary deconnexion
- * @tags auth
+ * @tags Auth
  * @return {string} 200 - success response - application/json
 */

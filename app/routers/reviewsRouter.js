@@ -1,6 +1,6 @@
 import express from "express";
 const reviewsRouter = express.Router();
-import { reviewsController } from "../controllers/reviewsController.js";
+import { reviewsController } from "../controllers/index.js";
 import { security } from "../services/security.js";
 
 reviewsRouter.post('/reviews', reviewsController.addReview);
@@ -20,13 +20,12 @@ export {reviewsRouter};
  * @property {string} name.required - nom de l'utilisateur
  * @property {date} date.required - date
  * @property {string} content.required - infos
- * @property {integer} rate.required - nombre de likes
- * @property {integer} user_id.required - note moyenne sur 5
+ * @property {integer} rate.required - note moyenne sur 5
  * @property {integer} drink_id.required - stock
 */
 
 /**
- * un commentaire
+ * formulaire de création d'un commentaire
  * @typedef {object} formCreateReview
  * @property {string} name.required - nom de l'utilisateur
  * @property {integer} rate.required - nombre de likes
@@ -38,17 +37,17 @@ export {reviewsRouter};
 
 /**
  * POST /reviews
- * @summary ajoute un commetaire
- * @tags review
+ * @summary ajoute un commentaire
+ * @tags Reviews
  * @param {formCreateReview} request.body.required - commentaire
  * @return {string} 200 - success response - application/json
 */
 
 /**
  * DELETE /reviews/{id}
- * @summary ajoute un commetaire
+ * @summary supprime un commentaire
  * @security TokenAuth
- * @tags review
+ * @tags Reviews
  * @param {integer} id.path - id
  * @return {string} 200 - success response - application/json
 */

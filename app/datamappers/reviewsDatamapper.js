@@ -21,7 +21,7 @@ const reviewsDatamapper = {
     },
 
     async deleteReview(id) {
-        // returning drink_id to update this drink's averageRate
+        // returning drink_id to update drink averageRate
         const sql = `
             DELETE FROM review
             WHERE id = $1
