@@ -10,6 +10,7 @@ drinksRouter.patch('/drinks/:id', security.validateToken, security.adminCheck, d
 drinksRouter.patch('/drinks/:id/isavailable', security.validateToken, security.adminCheck, drinksController.isavailable);
 drinksRouter.patch('/drinks/:id/unavailable', security.validateToken, security.adminCheck, drinksController.unavailable);
 drinksRouter.patch('/drinks/:id/addstar', drinksController.addstar);
+drinksRouter.patch('/drinks/:id/removestar', drinksController.removestar);
 drinksRouter.delete('/drinks/:id', security.validateToken, security.adminCheck, drinksController.deleteOneDrink);
 
 export {drinksRouter};
@@ -125,6 +126,14 @@ export {drinksRouter};
 /**
  * PATCH /drinks/{id}/addstar
  * @summary ajoute un like à une boisson
+ * @tags drinks
+ * @param {integer} id.path - id
+ * @return {drink} 200 - success response - application/json
+*/
+
+/**
+ * PATCH /drinks/{id}/removestar
+ * @summary retire un like à une boisson
  * @tags drinks
  * @param {integer} id.path - id
  * @return {drink} 200 - success response - application/json

@@ -84,6 +84,17 @@ const drinksDatamapper = {
         const values = [id];
         const result = await client.query(sql, values);
         return result.rows[0];
+    },
+
+    async removestar(id) {
+        const sql = `
+            UPDATE drink
+            SET starscounter = starscounter - 1
+            WHERE drink.id = $1
+            RETURNING *`;
+        const values = [id];
+        const result = await client.query(sql, values);
+        return result.rows[0];
     }
 };
 

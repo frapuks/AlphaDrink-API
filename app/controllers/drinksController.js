@@ -80,6 +80,16 @@ const drinksController = {
         } catch (error) {
             return res.status(500).json(error.message);
         }
+    },
+
+    async removestar(req, res) {
+        const drinkId = +req.params.id;
+        try {
+            const drink = await drinksDatamapper.removestar(drinkId);
+            return res.json(drink);
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
     }
 }
 
