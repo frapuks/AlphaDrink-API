@@ -1,0 +1,38 @@
+version: '1'
+
+services:
+  alphadrink-api:
+    container_name: "alphadrink-api"
+    image: alphadrink-api
+    volumes:
+      - .:/home/server/alphadrink-api
+    ports:
+      - '4102:${PORT}'
+    depends_on:
+      - alphadrink-db
+    restart: always
+    networks:
+      - alphadrink-network
+
+  alphadrink-db:
+    container_name: "alphadrink-db"
+    image: postgres
+    restart: always
+    ports:
+      - '5440:${PGPORT}'
+    environment:
+      - POSTGRES_USER=${PGUSER}
+      - POSTGRES_PASSWORD=${PGPASSWORD}
+      - POSTGRES_DB=${PGDATABASE}
+    networks:
+      - alphadrink-network
+    volumes:
+      - db-data-alphadrink:/var/lib/postgresql/data
+
+volumes:
+  db-data-alphadrink:
+
+networks:
+  alphadrink-network:
+    name: alphadrink-network
+    driver: bridge
